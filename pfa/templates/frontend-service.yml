@@ -1,22 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
   name: {{ .Values.frontend.service.name }}
 spec:
-  replicas: {{ .Values.deployment.replicas }}
+  type: {{ .Values.frontend.service.type }}
   selector:
-    matchLabels:
-      app: {{ .Values.frontend.service.name }}
-  template:
-    metadata:
-      labels:
-        app: {{ .Values.frontend.service.name }}
-    spec:
-      containers:
-        - name: frontend
-          image: {{ .Values.frontend.image }}
-          ports:
-            - containerPort: {{ .Values.frontend.port }}
-          env:
-            - name: VITE_API_URL
-              value: {{ .Values.frontend.env.VITE_API_URL }}
+    app: {{ .Values.frontend.service.name }}
+  ports:
+    - port: {{ .Values.frontend.port }}
+      targetPort: {{ .Values.frontend.port }}
+      nodePort: {{ .Values.frontend.nodePort }}
