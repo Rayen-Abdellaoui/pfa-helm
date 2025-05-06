@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mongorestore-job
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: mongorestore
+          image: mongo:latest
+          command: ["bash", "/docker-entrypoint-initdb.d/restore.sh"]
+          volumeMounts:
+            - name: dump-volume
+              mountPath: /dump
+            - name: script-volume
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: dump-volume
+          hostPath:
+            path: ./dump
+            type: Directory
+        - name: script-volume
+          hostPath:
+            path: ./restore.sh
+            type: File

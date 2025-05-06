@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: rayenabd/backend:1
+          ports:
+            - containerPort: 5555
+          env:
+            - name: MONGODB_URI
+              value: mongodb://admin:adminpass@mongodb:27017/PPP?authSource=admin
+            - name: API_URI
+              value: frontend
+          volumeMounts:
+            - name: logs-volume
+              mountPath: /app/logs
+      volumes:
+        - name: logs-volume
+          emptyDir: {}
