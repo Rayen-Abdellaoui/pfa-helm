@@ -9,7 +9,9 @@ mongodb:
   database: PPP
 
 backend:
-  image: rayenabd/backend:56ddbc0b
+  image:
+    name : rayenabd/backend
+    tag: 56ddbc0b
   port: 5555
   logsVolume: true
   apiUri: frontend
