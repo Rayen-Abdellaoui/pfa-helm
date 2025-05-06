@@ -22,7 +22,7 @@ frontend:
     tag : 10
     port: 80
   nodePort: 30080
-  viteApiUrl: http://backend:555
+  viteApiUrl: http://backend:5555
 
 mongorestore:
   enabled: true
