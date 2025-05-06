@@ -9,9 +9,7 @@ mongodb:
   database: PPP
 
 backend:
-  image: 
-    name : rayenabd/backend
-    tag:77328f05
+  image: rayenabd/backend:11
   port: 5555
   logsVolume: true
   apiUri: frontend
@@ -20,7 +18,7 @@ frontend:
   image: 
     name : rayenabd/frontend
     tag:77328f05
-    port: 80
+  port: 80
   nodePort: 30080
   viteApiUrl: http://backend:5555
 
