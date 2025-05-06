@@ -8,19 +8,10 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: mongorestore
-          image: mongo:latest
-          command: ["bash", "/docker-entrypoint-initdb.d/restore.sh"]
+          image: {{ .Values.mongorestore.image }}
+          command:
+            {{.Values.mongorestore.command }}
           volumeMounts:
-            - name: dump-volume
-              mountPath: /dump
-            - name: script-volume
-              mountPath: /docker-entrypoint-initdb.d
+            {{.Values.mongorestore.volumeMounts }}
       volumes:
-        - name: dump-volume
-          hostPath:
-            path: ./dump
-            type: Directory
-        - name: script-volume
-          hostPath:
-            path: ./restore.sh
-            type: File
+        {{ .Values.mongorestore.volumes}}

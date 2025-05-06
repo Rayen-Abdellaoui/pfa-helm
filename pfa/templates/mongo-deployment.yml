@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: {{ .Values.mongodb.service.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: mongodb
+      app: {{ .Values.mongodb.service.name }}
   template:
     metadata:
       labels:
-        app: mongodb
+        app: {{ .Values.mongodb.service.name }}
     spec:
       containers:
         - name: mongodb
-          image: mongo:latest
+          image: {{ .Values.mongodb.image }}
           ports:
-            - containerPort: 27017
+            - containerPort: {{ .Values.mongodb.port }}
           envFrom:
             - secretRef:
                 name: mongo-secret
@@ -26,4 +26,4 @@ spec:
       volumes:
         - name: mongo-storage
           persistentVolumeClaim:
-            claimName: mongo-pvc
+            claimName: {{ .Values.mongodb.pvc.name }}

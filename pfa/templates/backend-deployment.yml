@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: {{ .Values.backend.service.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: backend
+      app: {{ .Values.backend.service.name }}
   template:
     metadata:
       labels:
-        app: backend
+        app: {{ .Values.backend.service.name }}
     spec:
       containers:
         - name: backend
-          image: rayenabd/backend:1
+          image: {{ .Values.backend.image }}
           ports:
-            - containerPort: 5555
+            - containerPort: {{ .Values.backend.port }}
           env:
             - name: MONGODB_URI
-              value: mongodb://admin:adminpass@mongodb:27017/PPP?authSource=admin
+              value: {{ .Values.backend.env.MONGODB_URI }}
             - name: API_URI
-              value: frontend
+              value: {{ .Values.backend.env.API_URI }}
           volumeMounts:
             - name: logs-volume
               mountPath: /app/logs

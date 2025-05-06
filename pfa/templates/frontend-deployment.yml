@@ -1,22 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: frontend
+  name: {{ .Values.frontend.service.name }}
 spec:
-  replicas: 1
+  type: {{ .Values.frontend.service.type }}
   selector:
-    matchLabels:
-      app: frontend
-  template:
-    metadata:
-      labels:
-        app: frontend
-    spec:
-      containers:
-        - name: frontend
-          image: rayenabd/frontend:20250502190343 
-          ports:
-            - containerPort: 80
-          env:
-            - name: VITE_API_URL
-              value: http://backend:5555
+    app: {{ .Values.frontend.service.name }}
+  ports:
+    - port: {{ .Values.frontend.port }}
+      targetPort: {{ .Values.frontend.port }}
+      nodePort: {{ .Values.frontend.nodePort }}
