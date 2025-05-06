@@ -8,8 +8,8 @@ mongodb:
     size: 1Gi
   database: PPP
 
-backend:
-  backend:
+backend:62698f05
+  backend:62698f05
   image: 
     name : rayenabd/backend
     tag : 10
@@ -17,13 +17,13 @@ backend:
   logsVolume: true
   apiUri: frontend
 
-frontend:
+frontend:62698f05
   image: 
     name : rayenabd/frontend
     tag : 10
     port: 80
   nodePort: 30080
-  viteApiUrl: http://backend:5555
+  viteApiUrl: http://backend:62698f05
 
 mongorestore:
   enabled: true
