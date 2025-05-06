@@ -11,7 +11,7 @@ mongodb:
 backend:
   image:
     name : rayenabd/backend
-    tag: 56ddbc0b
+    tag: d85d2727
   port: 5555
   logsVolume: true
   apiUri: frontend
@@ -19,7 +19,7 @@ backend:
 frontend:
   image: 
     name : rayenabd/frontend
-    tag: 56ddbc0b
+    tag: d85d2727
   port: 80
   nodePort: 30080
   viteApiUrl: http://backend:5555
