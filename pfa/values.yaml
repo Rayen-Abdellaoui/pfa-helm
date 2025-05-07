@@ -33,8 +33,8 @@ frontend:
   service:
     name: frontend
     type: LoadBalancer
-  port: 80
-  targetPort: 3000
+  port: 3000
+  targetPort: 80
   nodePort: 30080
   env:
     VITE_API_URL: http://backend:5555
