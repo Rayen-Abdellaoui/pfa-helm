@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.frontend.service.name }}
 spec:
-  replicas: {{ .Values.deployment.replicas }}
+  replicas: {{ .Values.frontend.replicas }}
   selector:
     matchLabels:
       app: {{ .Values.frontend.service.name }}

@@ -1,8 +1,12 @@
 mongodb:
   image: mongo:latest
   port: 27017
-  username: admin
-  password: adminpass
+  service : 
+    name: mongo-service
+  auth :
+    username: admin
+    password: adminpass
+  replicas: 1
   pvc:
     name: mongo-pvc
     size: 1Gi
@@ -12,17 +16,27 @@ backend:
   image:
     name : rayenabd/backend
     tag: d85d2727
+  service:
+    name: backend-service
+    type: ClusterIP
   port: 5555
   logsVolume: true
-  apiUri: frontend
+  replicas: 1
+  env:
+    apiUri: frontend
 
 frontend:
   image: 
     name : rayenabd/frontend
     tag: d85d2727
+  service:
+    name: frontend-service
+    type: LoadBalancer
   port: 80
   nodePort: 30080
-  viteApiUrl: http://backend:5555
+  env:
+    viteApiUrl: http://backend:5555
+  replicas: 1
 
 mongorestore:
   enabled: true

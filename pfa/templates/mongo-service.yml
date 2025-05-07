@@ -4,6 +4,6 @@ metadata:
   name: {{ .Values.mongodb.service.name }}
 spec:
   ports:
-    - port: {{ .Values.mongodb.service.port }}
+    - port: {{ .Values.mongodb.port }}
   selector:
     app: {{ .Values.mongodb.service.name }}
