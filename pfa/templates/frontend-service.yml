@@ -8,5 +8,5 @@ spec:
     app: {{ .Values.frontend.service.name }}
   ports:
     - port: {{ .Values.frontend.port }}
-      targetPort: {{ .Values.frontend.port }}
+      targetPort: {{ .Values.frontend.targetPort }}
       nodePort: {{ .Values.frontend.nodePort }}
