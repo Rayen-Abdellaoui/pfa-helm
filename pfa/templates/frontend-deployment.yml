@@ -3,7 +3,11 @@ kind: Deployment
 metadata:
   name: {{ .Values.frontend.service.name }}
 spec:
+<<<<<<< HEAD
   replicas: {{ .Values.frontend.replicas }}
+=======
+  replicas: {{ .Values.deployment.replicas }}
+>>>>>>> 9d816212d3528af43b69db1656a0bb55caed4aeb
   selector:
     matchLabels:
       app: {{ .Values.frontend.service.name }}
@@ -19,4 +23,8 @@ spec:
             - containerPort: {{ .Values.frontend.port }}
           env:
             - name: VITE_API_URL
+<<<<<<< HEAD
               value: "{{ .Values.frontend.env.VITE_API_URL }}"
+=======
+              value: {{ .Values.frontend.env.VITE_API_URL }}
+>>>>>>> 9d816212d3528af43b69db1656a0bb55caed4aeb

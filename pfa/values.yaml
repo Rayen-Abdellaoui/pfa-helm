@@ -13,12 +13,7 @@ mongodb:
   database: PPP
 
 backend:
-  image:
-    name : rayenabd/backend
-    tag: test-1
-  service:
-    name: backend
-    type: ClusterIP
+  image: rayenabd/backend:2
   port: 5555
   logsVolume: true
   replicas: 1
@@ -27,14 +22,8 @@ backend:
     MONGODB_URI : mongodb://admin:adminpass@mongodb:27017/PPP?authSource=admin
 
 frontend:
-  image: 
-    name : rayenabd/frontend
-    tag: test
-  service:
-    name: frontend
-    type: LoadBalancer
-  port: 3000
-  targetPort: 80
+  image: rayenabd/frontend:2
+  port: 80
   nodePort: 30080
   env:
     VITE_API_URL: http://backend:5555
